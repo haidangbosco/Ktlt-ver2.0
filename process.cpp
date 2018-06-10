@@ -458,10 +458,8 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 
 }
 
-#pragma region Tien
-
-bool adminMenu(Admin& ad, StudentList& db_st_list, TeacherList& db_tc_list, UserList& user_list, CourseList &db_course_list, StudentCourseList &db_st_course_list)
-{
+#pragma region Admin(Tien)
+bool adminMenu(Admin& ad, StudentList& db_st_list, TeacherList& db_tc_list, UserList& user_list, CourseList &db_course_list, StudentCourseList &db_st_course_list) {
 	while (ad.isLogin() == true) {
 		cout << "\t\t\t\t" << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 		cout << "\t\t\t\t" << "|\t\tADMIN  SITE\t\t | \n";
@@ -504,11 +502,12 @@ bool adminMenu(Admin& ad, StudentList& db_st_list, TeacherList& db_tc_list, User
 }
 
 bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, TeacherList& db_tc_list, CourseList &db_course_list, StudentCourseList &db_st_course_list, arrayList<string> agvList) {
+	//Doi mat khau
 	if (agvList.list[0] == "cp") {
 		return cp(ad, agvList, user_list);
 	}
-	else if (agvList.list[0] == "as")
-	{
+	//Them student
+	else if (agvList.list[0] == "as") {
 		if (ad.addStudent(db_st_list, user_list) == 1) {
 			cout << "Add Student \"" << user_list.list[user_list.size - 1].username << "\" successful!" << endl;
 		}
@@ -519,8 +518,8 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 		cin.get();
 		return true;
 	}
-	else if (agvList.list[0] == "at")
-	{
+	//Them teacher
+	else if (agvList.list[0] == "at") {
 		if (ad.addTeacher(db_tc_list, user_list) == 1) {
 			cout << "Add Teacher \"" << user_list.list[user_list.size - 1].username << "\" successful!" << endl;
 		}
@@ -531,6 +530,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 		cin.get();
 		return true;
 	}
+	//Tim kiem student
 	else if (agvList.list[0] == "ss") {
 		if (agvList.size > 1) {
 			agvList.removeFromList(0);
@@ -577,6 +577,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 		cin.get();
 		return true;
 	}
+	//Tim kiem teacher
 	else if (agvList.list[0] == "st") {
 		if (agvList.size > 1) {
 			agvList.removeFromList(0);
@@ -623,6 +624,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 		cin.get();
 		return true;
 	}
+	//Xoa user
 	else if (agvList.list[0] == "ru") {
 		if (agvList.size == 1) {
 			cout << "Input list of usernames you want to remove (separate by space):" << endl;
@@ -662,8 +664,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 			cin.get();
 			return true;
 		}
-		else
-		{
+		else {
 			arrayList<string> remove_unsuccess;
 			for (size_t i = 1; i < agvList.size; i++) {
 				if (ad.removeUser(agvList.list[i], user_list, db_st_list, db_tc_list, db_course_list, db_st_course_list) == 1) {
@@ -688,6 +689,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 			return true;
 		}
 	}
+	//In help
 	else if (agvList.list[0] == "h") {
 		if (agvList.size == 1) {
 			system("cls");
@@ -717,18 +719,21 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 			return true;
 		}
 	}
+	//In danh sach teacher
 	else if (agvList.list[0] == "t") {
 		db_tc_list.print();
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
 		return true;
 	}
+	//In danh sach student
 	else if (agvList.list[0] == "s") {
 		db_st_list.print();
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
 		return true;
 	}
+	//Dang xuat
 	else if (agvList.list[0] == "lo") {
 		ad.logout();
 		system("cls");
@@ -736,5 +741,4 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 	}
 	return false;
 }
-
 #pragma endregion

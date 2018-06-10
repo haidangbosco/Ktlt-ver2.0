@@ -27,7 +27,6 @@ public:
 	bool removeUser(string username, UserList &db_user_list, StudentList &db_st_list, TeacherList &db_tc_list, CourseList &db_course_list, StudentCourseList &db_st_course_list);
 	bool addStudent(StudentList &db_st_list, UserList &db_user_list);
 	bool addTeacher(TeacherList &db_tc_list, UserList &db_user_list);
-	
 };
 
 #endif // !_ADMIN_

@@ -1,12 +1,14 @@
 #include "Admin.h"
+
 using namespace std;
 
-inline string remove_space(string str)
-{
+//Loai bo khoang trang khoi string
+inline string remove_space(string str) {
 	str.erase(remove(str.begin(), str.end(), ' '), str.end());
 	return str;
 }
 
+//Kiem tra string co chua dau phay "," khong
 inline bool check_comma(string np) {
 	for (int i = 0; i < np.length(); i++) {
 		if (np[i] == ',') return false;
@@ -14,10 +16,12 @@ inline bool check_comma(string np) {
 	return true;
 }
 
+//Kiem tra nam nhuan
 inline bool isleapyear(unsigned short year) {
 	return (!(year % 4) && (year % 100) || !(year % 400));
 }
 
+//Kiem tra ngay thang nam hop le
 inline bool valid_date(unsigned short year, unsigned short month, unsigned short day) {
 	unsigned short monthlen[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	if (!year || !month || !day || month>12)
@@ -29,6 +33,7 @@ inline bool valid_date(unsigned short year, unsigned short month, unsigned short
 	return 1;
 }
 
+//Ham nhap ten
 inline bool input_name(string &name) {
 	string s;
 	cout << "Input name:" << endl;
@@ -46,6 +51,7 @@ inline bool input_name(string &name) {
 	return 1;
 }
 
+//Ham nhap ngay thang nam sinh
 inline bool input_birthday(string &birthday) {
 	string s;
 	stringstream ss, ss2;
@@ -89,6 +95,7 @@ inline bool input_birthday(string &birthday) {
 	return 1;
 }
 
+//Ham nhap que quan
 inline bool input_hometown(string &hometown) {
 	string s;
 	cout << "Input hometown:" << endl;
@@ -100,6 +107,7 @@ inline bool input_hometown(string &hometown) {
 	return 1;
 }
 
+//Ham them nguoi dung vao user.csv
 bool Admin::addUser(User user, UserList &db_user_list) {
 	if (db_user_list.findUserByUsername(user.username) != -1) {
 		return 0;
@@ -110,6 +118,7 @@ bool Admin::addUser(User user, UserList &db_user_list) {
 	}
 }
 
+//Ham xoa tat ca du lieu cua nguoi dung khoi database
 bool Admin::removeUser(string username, UserList &db_user_list, StudentList &db_st_list, TeacherList &db_tc_list, CourseList &db_course_list, StudentCourseList &db_st_course_list) {
 	int index = db_user_list.findUserByUsername(username);
 	if (index == -1 || db_user_list.list[index].role == "admin") {
@@ -191,6 +200,7 @@ bool Admin::removeUser(string username, UserList &db_user_list, StudentList &db_
 	}
 }
 
+//Ham them student
 bool Admin::addStudent(StudentList &db_st_list, UserList &db_user_list) {
 	Student st;
 	User student;
@@ -233,6 +243,7 @@ bool Admin::addStudent(StudentList &db_st_list, UserList &db_user_list) {
 	}
 }
 
+//Ham them teacher
 bool Admin::addTeacher(TeacherList &db_tc_list, UserList &db_user_list) {
 	Teacher tc;
 	User teacher;
