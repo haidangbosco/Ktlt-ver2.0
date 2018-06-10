@@ -54,6 +54,7 @@ void Course::printCourseInfo(){
 	cout << setfill('-') << setw(50) << "-" << "New Course" << setfill('-') << setw(55) << "-" << setfill(' ') << endl;
 	cout
 		<< left << setw(20) << "Course Id"
+		<< left << setw(10) << "Fal ID"
 		<< left << setw(25) << "Falcuty"
 		<< left << setw(15) << "Subject Id"
 		<< left << setw(35) << "Subject Name"
@@ -63,6 +64,7 @@ void Course::printCourseInfo(){
 
 	cout
 		<< left << setw(20) << this->course_id
+		<< left << setw(10) <<this->fal_id
 		<< left << setw(25) << this->falcuty
 		<< left << setw(15) << this->sub_id
 		<< left << setw(35) << this->sub_name

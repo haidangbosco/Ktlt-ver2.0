@@ -187,6 +187,7 @@ void writeToCouresFile(CourseList &courseList) {
 	file.open("course.csv", ios::out);
 	for (size_t i = 0; i<courseList.size; i++) {
 		file << courseList.list[i].course_id << ",";
+		file << courseList.list[i].fal_id << ",";
 		file << courseList.list[i].falcuty << ",";
 		file << courseList.list[i].sub_id << ",";
 		file << courseList.list[i].sub_name << ",";

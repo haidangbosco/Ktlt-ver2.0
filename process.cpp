@@ -519,9 +519,9 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 			if (ans == 'Y'){
 				cout << "SUCESSFULLY OPEN A NEW COURSE \n";
 				cout << "Date created: " << endl;
-				std::time_t t = std::time(0);   // get time now
-				std::tm* now = std::localtime(&t);
-				std::cout << (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-' << now->tm_mday << "\n";
+				//std::time_t t = std::time(0);   // get time now
+				//std::tm* now = std::localtime(&t);
+				//std::cout << (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-' << now->tm_mday << "\n";
 				cin.ignore(INT_MAX, '\n');
 				db_course_list.addToCourseList(newCourse);
 				return true;

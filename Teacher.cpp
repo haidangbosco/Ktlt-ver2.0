@@ -4,7 +4,7 @@ using namespace std;
 
 
 CourseList* Teacher::teacherCourse(CourseList db_course_list){
-	return db_course_list.findCourseByFacuty(this->tc_name);
+	return db_course_list.findCourseByFacutyId(this->tc_identify);
 }
 CourseList* Teacher::tcSumCourse(CourseList db_course_list,StudentCourseList db_st_course_list){
 	CourseList* tc_sumed = new CourseList();
