@@ -29,6 +29,17 @@ public:
 		if (this->username == "")return false;
 		else return true;
 	}
+	string removeSpaces(string str)
+	{
+		str.erase(remove(str.begin(), str.end(), ' '), str.end());
+		return str;
+	}
+	bool checkNewPass(string np) {
+		for (int i = 0; i < np.length(); i++) {
+			if (np[i] == ',' || np[i] == '.' || np[i] == '?' || np[i] == '/' || np[i] == '>' || np[i] == '<' ||np[i] == '@' || np[i] == '#' || np[i] == '!') return false;
+		}
+		return true;
+	}
 	void changePassword(string newPassword) {
 		this->password = newPassword;
 	}

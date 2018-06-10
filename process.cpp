@@ -131,7 +131,6 @@ bool teacherMenu(Teacher& tc, StudentCourseList& db_st_course_list, CourseList& 
 }
 bool studentProcess(Student&st, UserList& user_list, StudentCourseList& db_st_course_list, CourseList db_course_list, arrayList<string> agvList) {
 	if (agvList.list[0] == "cp") {
-		
 		return cp(st, agvList, user_list);
 	}
 	else if (agvList.list[0] == "vc") {
@@ -394,105 +393,19 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 			//tc.showTeacherCouser(*tc_open_course,db_st_course_list);
 			if (tc_open_course->size == 0){
 				cout << "Try opening a course in main menu.\n";
-				cout << "Press enter to go back.";
+				cout << "PRESS ENTER TO GO BACK";
 				cin.get();
 				return true;
 			}
-			cout << "Press enter to go back.";
+			cout << "PRESS ENTER TO GO BACK";
 			cin.get();
 			return true;
 	}
 
 #pragma region OpenCourse
 	else if (agvList.list[0] == "oc"){
-		CourseList* sum = new CourseList();
-		CourseList* nsum = new CourseList();
-		//temp = tc.teacherCourse(db_course_list);
-		sum = tc.tcSumCourse(db_course_list, db_st_course_list);
-		nsum = tc.tcNotSumCourse(db_course_list, db_st_course_list);
-		if (nsum->size >= 5){
-			cout << "You has open 5 courses for  this term so you cannot open more course.\n";
-			cout << "Press Enter to go back";
-			cin.get();
-			return true;
-		}
-		else{
-			string newCourse_sub_id; //ms viet tat mon hoc
-			string newCourse_class_id; //nhom lop
-			string newCourse_id; //ms mon hoc
-			string newCourse_name; //ten mon hoc
-			float newCourse_max; //so luong sv toi da
-			float newCourse_ncredit; //tin chi
-			Course dummy;
-			do{
-				cout << "Input new sub_course ID you want to open: ";
-				cin >> newCourse_sub_id;
-				cin.ignore(INT_MAX, '\n');
-				cout << "Input class group: ";
-				cin >> newCourse_class_id;
-				cin.ignore(INT_MAX, '\n');
-				newCourse_id = newCourse_sub_id + newCourse_class_id;
-				if (db_course_list.isCourseExist(newCourse_id,dummy)){
-					cout << "You can not open an existed course. Try again! \n";
-				}
-			} while (db_course_list.isCourseExist(newCourse_id,dummy));
-			cout << "Input new course details.\n";
-			cout << "Input course name: "; getline(cin, newCourse_name);
-
-			do{
-				cout << "Input student number limitation (at least 10) : "; cin >> newCourse_max;
-				cin.clear();
-				cin.ignore(INT_MAX, '\n');
-				if (newCourse_max < 10 || cin.bad() || newCourse_max != (int)newCourse_max){
-					cout << "Invalid input.Try again!\n";
-				}
-			} while (cin.bad() || newCourse_max < 10 || newCourse_max != (int)newCourse_max);
-
-			do{
-				cout << "Input course's credit number (1-6): "; cin >> newCourse_ncredit;
-				cin.clear();
-				cin.ignore(INT_MAX, '\n');
-
-				if (!cin.good() || newCourse_ncredit<1 || newCourse_ncredit>6 || newCourse_ncredit != (int)newCourse_ncredit){
-					cout << "Invalid input.Try again!\n";
-				}
-			} while (cin.bad() || newCourse_ncredit < 1 || newCourse_ncredit>6 || newCourse_ncredit != (int)newCourse_ncredit);
-
-			Course newCourse(newCourse_sub_id, newCourse_name, tc.tc_name, tc.tc_identify);
-			newCourse.course_id = newCourse_id;
-			newCourse.total_st = 0;
-			newCourse.max_st = newCourse_max;
-			newCourse.credit = newCourse_ncredit;
-			cout << "NEW COURSE PREVIEW: \n";
-			newCourse.printCourseInfo();
-			char ans;
-			cout << "Are you sure to open this course? [Y/N] :";
-			do{
-				cin >> ans;
-				if (ans != 'Y' && ans != 'N'){
-					cout << "Retype: ";
-				}
-				cin.ignore(INT_MAX, '\n');
-			} while (ans != 'Y' && ans != 'N');
-			if (ans == 'Y'){
-				cout << "SUCESSFULLY OPEN A NEW COURSE \n";
-				//cout << "Date created: " << endl;
-				//std::time_t t = std::time(0);   // get time now
-				//std::tm* now = std::localtime(&t);
-				//std::cout << (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-' << now->tm_mday << "\n";
-				cin.ignore(INT_MAX, '\n');
-				db_course_list.addToCourseList(newCourse);
-				return true;
-			}
-			else{
-				
-				return true;
-			}
-			
-
-		}//else right
-
-	}//end br
+		return tc.openNewCourse(tc, db_st_course_list, db_course_list);
+	}
 
 #pragma endregion
 
