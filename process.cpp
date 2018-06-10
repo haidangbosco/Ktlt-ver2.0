@@ -500,7 +500,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 				}
 			} while (cin.bad() || newCourse_ncredit < 1 || newCourse_ncredit>6 || newCourse_ncredit != (int)newCourse_ncredit);
 
-			Course newCourse(newCourse_sub_id, newCourse_name, tc.tc_name);
+			Course newCourse(newCourse_sub_id, newCourse_name, tc.tc_name, tc.tc_identify);
 			newCourse.course_id = newCourse_id;
 			newCourse.total_st = 0;
 			newCourse.max_st = newCourse_max;
