@@ -43,7 +43,7 @@ inline bool input_name(string &name) {
 	}
 	to_upper(s);
 	for (unsigned int i = 0; i < s.length(); i++) {
-		if (isdigit(s[i])) {
+		if (isalpha(s[i]) == 0) {
 			return 0;
 		}
 	}
