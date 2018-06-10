@@ -27,7 +27,7 @@ public:
 		this->tc_identify = id;
 	}
 	~Teacher(){};
-
+	bool openNewCourse(Teacher& tc, StudentCourseList& db_st_course_list, CourseList& db_course_list);
 	bool openCourse(CourseList& db_courseList, Course newCourse); //mo mot khoa hoc
 	bool gradingCourse(StudentCourseList& st_join_course); //tong ket diem va sua diem
 

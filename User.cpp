@@ -48,17 +48,7 @@ void UserList::updateList(User& user) {
 	}
 }
 
-string removeSpaces(string str)
-{
-	str.erase(remove(str.begin(), str.end(), ' '), str.end());
-	return str;
-}
-bool checkNewPass(string np) {
-	for (int i = 0; i < np.length(); i++) {
-		if (np[i] == ',') return false;
-	}
-	return true;
-}
+
 
 bool cp(User user, arrayList<string> agvList, UserList &user_list) {
 	string newPassword;
@@ -68,10 +58,10 @@ bool cp(User user, arrayList<string> agvList, UserList &user_list) {
 	else if (agvList.size == 1) {
 		cout << "Input your new password: ";
 		getline(cin, newPassword);
-		newPassword = removeSpaces(newPassword);
+		newPassword = user.removeSpaces(newPassword);
 	}
-	if (!checkNewPass(newPassword)) {
-		cout << "NEW PASSWORD MUST NOT CONTAIN ',' CHARATER (SYSTEM REQUIRE),TRY AGAIN LATER.\n";
+	if (!user.checkNewPass(newPassword)) {
+		cout << "NEW PASSWORD MUST NOT CONTAIN ', . ? @ $ # ...' CHARATER (SYSTEM REQUIRE),TRY AGAIN LATER.\n";
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
 		return true;
