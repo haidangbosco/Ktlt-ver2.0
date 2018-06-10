@@ -185,15 +185,17 @@ bool Teacher:: openNewCourse(Teacher& tc, StudentCourseList& db_st_course_list, 
 		Course dummy;
 		do{
 			do{
-				cout << "\nInput new sub_course ID you want to open: ";
+				cout << "\nInput new sub_course ID you want to open (input 0 to exit): ";
 				cin >> newCourse_sub_id;
 				cin.ignore(INT_MAX, '\n');
+				if (newCourse_sub_id == "0") return true;
 				if (!tc.checkNewPass(newCourse_sub_id)) cout << "New course details do not allow special sign character (, ! # @...).Try again\n";
 			} while (!tc.checkNewPass(newCourse_sub_id));
 			do{
-				cout << "Input class group: ";
+				cout << "Input class group (input 0 to exit): ";
 				cin >> newCourse_class_id;
 				cin.ignore(INT_MAX, '\n');
+				if (newCourse_class_id == "0") return true;
 				if (!tc.checkNewPass(newCourse_class_id)) cout << "New course details do not allow special sign character (, ! # @...).Try again\n";
 			} while (!tc.checkNewPass(newCourse_class_id));
 			newCourse_id = newCourse_sub_id + newCourse_class_id;
@@ -204,25 +206,28 @@ bool Teacher:: openNewCourse(Teacher& tc, StudentCourseList& db_st_course_list, 
 
 		cout << "Input new course details.\n";
 		do{
-			cout << "Input course name: ";
+			cout << "Input course name (input 0 to exit): ";
 			getline(cin, newCourse_name);
+			if (newCourse_name == "0") return true;
 			if (!tc.checkNewPass(newCourse_name)) cout << "New course details do not allow special sign character (, ! # @...).Try again\n";
 		} while (!tc.checkNewPass(newCourse_name));
 
 		do{
-			cout << "Input student number limitation (at least 10) : "; cin >> newCourse_max;
+			cout << "Input student number limitation (at least 10)(input 0 to exit) : "; cin >> newCourse_max;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
+			if (newCourse_max == 0) return true;
 			if (newCourse_max < 10 || cin.bad() || newCourse_max != (int)newCourse_max){
 				cout << "Invalid input.Try again!\n";
 			}
+			 
 		} while (cin.bad() || newCourse_max < 10 || newCourse_max != (int)newCourse_max);
 
 		do{
-			cout << "Input course's credit number (1-6): "; cin >> newCourse_ncredit;
+			cout << "Input course's credit number (1-6) (input 0 to exit): "; cin >> newCourse_ncredit;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
-
+			if (newCourse_max == 0) return true;
 			if (!cin.good() || newCourse_ncredit<1 || newCourse_ncredit>6 || newCourse_ncredit != (int)newCourse_ncredit){
 				cout << "Invalid input.Try again!\n";
 			}
