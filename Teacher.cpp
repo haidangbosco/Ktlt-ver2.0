@@ -33,6 +33,8 @@ CourseList* Teacher::tcNotSumCourse(CourseList db_course_list, StudentCourseList
 	return tc_nsumed;
 }
 bool Teacher::gradingCourse(StudentCourseList& st_join_course){
+	
+
 	int flag = 0;
 	cout << endl;
 	cout << setw(40) << right << "\nStudent List:\n" << endl;
@@ -51,6 +53,7 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 	if (st_join_course.isGrade()){
 		int index;
 		int a = 0;
+
 		do{
 			double spoint;
 
@@ -82,9 +85,13 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 			
 		} while (index != 0||cin.bad());
 	}
+
 	else{
-		cout << "Sumarize ( input 11 to exit ) : \n";
+		cout << "Sumarize ( input 11 to skip to next student, 12 to cancel,14 to finish (if you are busy) ) : \n";
+		int flag1 = 0;
+		int n= 0;
 		for (int i = 0; i<st_join_course.size; ++i){
+			if (flag1 == 1) break;
 			double spoint;
 			do{
 				cout << st_join_course.list[i].st_num << " : ";
@@ -92,15 +99,26 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
 				if (spoint == 11){
+					spoint = -1;
+				}
+				else if (spoint == 12){
+					for (int i = 0; i < n; i++){
+						st_join_course.list[i].st_point.list[0] = -1;
+					}
+					return true;
+				}
+				else if (spoint == 14){
+					flag1 = 1;
+					spoint = -1;
 					break;
 				}
-				if (spoint<-1 || spoint == 12 || spoint>13 || cin.bad()){
+				else if (spoint<-1|| spoint>13 || cin.bad()){
 					cout << "Wrong input, try again!\n";
 					continue;
 				}
-
-			} while (spoint<-1 || spoint == 12 || spoint>13 || cin.bad());
+			} while (spoint<-1|| spoint>13 || cin.bad());
 			st_join_course.list[i].st_point.list[0] = spoint;
+			n++;
 		}
 	}
 	if (flag!=1){
@@ -252,6 +270,45 @@ bool Teacher::openCourse(CourseList& db_course_list, Course newCourse){
 		db_course_list.addToCourseList(newCourse);
 	}
 
+}
+bool Teacher::viewCourse(Teacher& tc, StudentCourseList& db_st_course_list, CourseList& db_course_list){
+	CourseList* tc_open_course = new CourseList();
+	tc_open_course = tc.teacherCourse(db_course_list); //lay danh sach nhung course ma teacher da mo
+	StudentCourseList* data = new StudentCourseList();
+	CourseList* tc_sum = tc.tcSumCourse(db_course_list, db_st_course_list);
+	CourseList* tc_nsum = tc.tcNotSumCourse(db_course_list, db_st_course_list);
+	if (tc_open_course->size == 0){
+		cout << "YOU HAVE NOT OPEN ANY COURSE YET.\n";
+		cin.get();
+		return true;
+	}
+	if (tc_sum->size != 0){
+		cout << "Your sumarized course: \n";
+		tc.showTeacherCouser(*tc_sum, db_st_course_list);
+	}
+	else{
+		cout << "Your sumarized course: \n";
+		cout << "You have not sumarized any course yet.\n";
+	}
+
+	if (tc_nsum->size != 0){
+		cout << "\nYour unsumarized course: \n";
+		tc.showTeacherCouser(*tc_nsum, db_st_course_list);
+	}
+	else{
+		cout << "\nYour unsumarized course: \n";
+		cout << "All course has ben sumarized.\n";
+	}
+	//tc.showTeacherCouser(*tc_open_course,db_st_course_list);
+	if (tc_open_course->size == 0){
+		cout << "Try opening a course in main menu.\n";
+		cout << "PRESS ENTER TO GO BACK";
+		cin.get();
+		return true;
+	}
+	cout << "PRESS ENTER TO GO BACK";
+	cin.get();
+	return true;
 }
 
 ///Teacher_List_Modify

@@ -355,59 +355,20 @@ bool studentProcess(Student&st, UserList& user_list, StudentCourseList& db_st_co
 }
 bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_course_list, CourseList& db_course_list, arrayList<string> agvList) {
 
-#pragma region ChangePass
+	//Change Pass
 	if (agvList.list[0] == "cp"){
 		return cp(tc, agvList, user_list);
 	}
-#pragma endregion
 
+	// View course
 	else if (agvList.list[0] == "vc"){
-		
-			CourseList* tc_open_course = new CourseList();
-			tc_open_course = tc.teacherCourse(db_course_list); //lay danh sach nhung course ma teacher da mo
-			StudentCourseList* data = new StudentCourseList();
-			CourseList* tc_sum = tc.tcSumCourse(db_course_list, db_st_course_list);
-			CourseList* tc_nsum = tc.tcNotSumCourse(db_course_list, db_st_course_list);
-			if (tc_open_course->size == 0){
-				cout << "YOU HAVE NOT OPEN ANY COURSE YET.\n";
-				cin.get();
-				return true;
-			}
-			if (tc_sum->size != 0){
-				cout << "Your sumarized course: \n";
-				tc.showTeacherCouser(*tc_sum, db_st_course_list);
-			}
-			else{
-				cout << "Your sumarized course: \n";
-				cout << "You have not sumarized any course yet.\n";
-			}
-
-			if (tc_nsum->size != 0){
-				cout << "\nYour unsumarized course: \n";
-				tc.showTeacherCouser(*tc_nsum, db_st_course_list);
-			}
-			else{
-				cout << "\nYour unsumarized course: \n"; 
-				cout << "All course has ben sumarized.\n";
-			}
-			//tc.showTeacherCouser(*tc_open_course,db_st_course_list);
-			if (tc_open_course->size == 0){
-				cout << "Try opening a course in main menu.\n";
-				cout << "PRESS ENTER TO GO BACK";
-				cin.get();
-				return true;
-			}
-			cout << "PRESS ENTER TO GO BACK";
-			cin.get();
-			return true;
+		return tc.viewCourse(tc, db_st_course_list, db_course_list);
 	}
 
-#pragma region OpenCourse
+	//Open new course
 	else if (agvList.list[0] == "oc"){
 		return tc.openNewCourse(tc, db_st_course_list, db_course_list);
 	}
-
-#pragma endregion
 
 #pragma region Grading
 
