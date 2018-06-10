@@ -525,7 +525,7 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 			cout << "Add Teacher \"" << user_list.list[user_list.size - 1].username << "\" successful!" << endl;
 		}
 		else {
-			cout << "Add Teacher unsuccessful!\nMay be error or the same username have exist." << endl;
+			cout << "Add Teacher unsuccessful!\nMay be error in your input or the same username have exist." << endl;
 		}
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
@@ -712,11 +712,6 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 			cout << "Input as this format <number, name, birthday, \"hometown\"> (separate by comma):" << endl << endl;
 			cout << setw(40) << setfill(' ') << left << "Log out" << "[lo]" << endl;
 			cout << "Input <lo> to log out. (Then you can log in as another user)." << endl << endl;
-			//cout << "Input anything to return." << endl;
-			/*getchar();
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
-			system("cls");*/
 			cout << "PRESS ENTER TO GO BACK\n";
 			cin.get();
 			return true;
@@ -724,22 +719,12 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 	}
 	else if (agvList.list[0] == "t") {
 		db_tc_list.print();
-		//cout << "Input anything to return." << endl;
-		/*getchar();
-		system("cls");
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');*/
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
 		return true;
 	}
 	else if (agvList.list[0] == "s") {
 		db_st_list.print();
-		//cout << "Input anything to return." << endl;
-		/*getchar();
-		system("cls");
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');*/
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
 		return true;

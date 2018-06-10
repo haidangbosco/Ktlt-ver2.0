@@ -18,7 +18,6 @@ inline bool isleapyear(unsigned short year) {
 	return (!(year % 4) && (year % 100) || !(year % 400));
 }
 
-//1 valid, 0 invalid
 inline bool valid_date(unsigned short year, unsigned short month, unsigned short day) {
 	unsigned short monthlen[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	if (!year || !month || !day || month>12)
@@ -74,8 +73,6 @@ inline bool input_birthday(string &birthday) {
 		return 0;
 	}
 	if (valid_date(y, m, d) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	ss2 << y << '-';
@@ -87,7 +84,6 @@ inline bool input_birthday(string &birthday) {
 		ss2 << '0';
 	}
 	ss2 << d;
-	//ss << y << '-' << m << '-' << d;
 	ss2 >> s;
 	birthday = s;
 	return 1;
@@ -204,21 +200,15 @@ bool Admin::addStudent(StudentList &db_st_list, UserList &db_user_list) {
 	cout << "Input number:" << endl;
 	getline(cin, s);
 	if (check_comma(s) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	s = remove_space(s);
 	ss.str(s);
 	ss >> st.st_number;
 	if (ss.fail()) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (st.st_number < 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	ss2 << st.st_number;
@@ -226,18 +216,12 @@ bool Admin::addStudent(StudentList &db_st_list, UserList &db_user_list) {
 	student.username = s;
 	student.password = s;
 	if (input_name(st.st_name) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (input_birthday(st.st_birthday) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (input_hometown(st.st_home_town) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (addUser(student, db_user_list) == 1) {
@@ -257,42 +241,30 @@ bool Admin::addTeacher(TeacherList &db_tc_list, UserList &db_user_list) {
 	cout << "Input identify:" << endl;
 	getline(cin, s);
 	if (check_comma(s) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	s = remove_space(s);
 	if (s == "q") {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	tc.tc_identify = s;
 	teacher.username = s;
 	teacher.password = s;
 	if (input_name(tc.tc_name) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (input_birthday(tc.tc_birthday) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	cout << "Input phone:" << endl;
 	getline(cin, s);
 	for (unsigned int i = 0; i < s.length(); i++) {
 		if (isdigit(s[i]) == 0) {
-			cin.clear();
-			cin.ignore(INT_MAX, '\n');
 			return 0;
 		}
 	}
 	tc.tc_phone_number = "\"" + s + "\"";
 	if (input_hometown(tc.tc_home_town) == 0) {
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
 		return 0;
 	}
 	if (addUser(teacher, db_user_list)) {
