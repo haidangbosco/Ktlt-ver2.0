@@ -631,35 +631,12 @@ bool adminMenu(Admin& ad, StudentList& db_st_list, TeacherList& db_tc_list, User
 
 bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, TeacherList& db_tc_list, CourseList &db_course_list, StudentCourseList &db_st_course_list, arrayList<string> agvList) {
 	if (agvList.list[0] == "cp") {
-		/*
-		if (agvList.size == 2) {
-			string newPassword = agvList.list[1];
-			ad.changePassword(newPassword);
-			user_list.updateList(ad);
-			cout << "CHANGE PASSWORD SUCCESSFULLY" << endl;
-			cout << "PRESS ENTER TO GO BACK\n";
-			cin.get();
-			return true;
-		}
-		else if (agvList.size == 1) {
-			string newPassword;
-			cout << "Your new password: ";
-			cin >> newPassword;
-			cin.ignore(INT_MAX, '\n');
-			ad.changePassword(newPassword);
-			user_list.updateList(ad);
-			cout << "CHANGE PASSWORD SUCCESSFULLY" << endl;
-			cout << "PRESS ENTER TO GO BACK\n";
-			cin.get();
-			return true;
-		}
-		*/
 		return cp(ad, agvList, user_list);
 	}
 	else if (agvList.list[0] == "as")
 	{
-		if (ad.addStudent(db_st_list, user_list)) {
-			cout << "Add Student successful!" << endl;
+		if (ad.addStudent(db_st_list, user_list) == 1) {
+			cout << "Add Student \"" << user_list.list[user_list.size - 1].username << "\" successful!" << endl;
 		}
 		else {
 			cout << "Add Student unsuccessful!\nMay be error in your input or the same username have exist." << endl;
@@ -670,11 +647,11 @@ bool adminProcess(Admin& ad, UserList& user_list, StudentList& db_st_list, Teach
 	}
 	else if (agvList.list[0] == "at")
 	{
-		if (ad.addTeacher(db_tc_list, user_list)) {
-			cout << "Add Teacher successful!" << endl;
+		if (ad.addTeacher(db_tc_list, user_list) == 1) {
+			cout << "Add Teacher \"" << user_list.list[user_list.size - 1].username << "\" successful!" << endl;
 		}
 		else {
-			cout << "Add Teacher unsuccessful! May be the same username have exist." << endl;
+			cout << "Add Teacher unsuccessful!\nMay be error or the same username have exist." << endl;
 		}
 		cout << "PRESS ENTER TO GO BACK\n";
 		cin.get();
