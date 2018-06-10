@@ -131,24 +131,7 @@ bool teacherMenu(Teacher& tc, StudentCourseList& db_st_course_list, CourseList& 
 }
 bool studentProcess(Student&st, UserList& user_list, StudentCourseList& db_st_course_list, CourseList db_course_list, arrayList<string> agvList) {
 	if (agvList.list[0] == "cp") {
-		/*
-		if (agvList.size == 2) {
-			string newPassword = agvList.list[1];
-			st.changePassword(newPassword);
-			user_list.updateList(st);
-			return true;
-		}
-		else if (agvList.size == 1){
-			string newPassword;
-			cout << "Your new password: ";
-			cin >> newPassword;
-			cin.ignore(INT_MAX, '\n');
-			st.changePassword(newPassword);
-			user_list.updateList(st);
-			cout << "CHANGE PASSWORD SUCCESSFULLY" << endl;
-			return true;
-		}
-		*/
+		
 		return cp(st, agvList, user_list);
 	}
 	else if (agvList.list[0] == "vc") {
@@ -375,31 +358,6 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 
 #pragma region ChangePass
 	if (agvList.list[0] == "cp"){
-		/*
-		string newPassword;
-		if (agvList.size != 1){
-			for (int i = 1; i < agvList.size; i++) newPassword += agvList.list[i];
-		}
-		else if (agvList.size == 1){
-			cout << "Input your new password: ";
-			getline(cin, newPassword);
-			newPassword=removeSpaces(newPassword);
-		}
-		if (!checkNewPass(newPassword)){
-			cout << "NEW PASSWORD MUST NOT CONTAIN ',' CHARATER (SYSTEM REQUIRE),TRY AGAIN LATER.\n";
-			cout << "PRESS ENTER TO GO BACK\n";
-			cin.get();
-			return true;
-		}
-		else{
-			tc.changePassword(newPassword);
-			user_list.updateList(tc);
-			cout << "CHANGE PASSWORD SUCCESSFULLY--YOUR NEWPASS (please remember it): " << newPassword << endl;
-			cout << "PRESS ENTER TO GO BACK\n";
-			cin.get();
-			return true;
-		}
-		*/
 		return cp(tc, agvList, user_list);
 	}
 #pragma endregion
@@ -473,7 +431,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 				cout << "Input class group: ";
 				cin >> newCourse_class_id;
 				cin.ignore(INT_MAX, '\n');
-				newCourse_id = newCourse_sub_id + "_" + newCourse_class_id;
+				newCourse_id = newCourse_sub_id + newCourse_class_id;
 				if (db_course_list.isCourseExist(newCourse_id,dummy)){
 					cout << "You can not open an existed course. Try again! \n";
 				}
@@ -518,7 +476,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 			} while (ans != 'Y' && ans != 'N');
 			if (ans == 'Y'){
 				cout << "SUCESSFULLY OPEN A NEW COURSE \n";
-				cout << "Date created: " << endl;
+				//cout << "Date created: " << endl;
 				//std::time_t t = std::time(0);   // get time now
 				//std::tm* now = std::localtime(&t);
 				//std::cout << (now->tm_year + 1900) << '-' << (now->tm_mon + 1) << '-' << now->tm_mday << "\n";
@@ -548,7 +506,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 		tc.showTeacherCouser(*tc_open_course,db_st_course_list);
 		if (tc_open_course->size == 0){
 			cout << "Try opening a course in main menu.\n";
-			cout << "Press enter to go back.";
+			cout << "PRESS ENTER TO GO BACK";
 			cin.get();
 			return true;
 		}
@@ -575,7 +533,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 					if (data->size == 0){
 						cout << "There are no students applied to this course, try again later!\n";
 						flag = 0;
-						cout << "Press enter to go back.\n";
+						cout << "PRESS ENTER TO GO BACK\n";
 						cin.get();
 						
 						return true;
@@ -584,7 +542,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 					if (flag == 1){
 						tc.gradingCourse(*data);
 						db_st_course_list.updatePoint(*data);
-						cout << "Press enter to go back.\n";
+						cout << "PRESS ENTER TO GO BACK\n";
 						cin.get();
 						return true;
 					}

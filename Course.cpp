@@ -56,7 +56,7 @@ void Course::printCourseInfo(){
 		<< left << setw(20) << "Course Id"
 		<< left << setw(10) << "Fal ID"
 		<< left << setw(25) << "Falcuty"
-		<< left << setw(15) << "Subject Id"
+		<< left << setw(15) << "Sub_Id"
 		<< left << setw(35) << "Subject Name"
 
 		<< left << setw(6) << "Credit" << endl;
@@ -150,7 +150,7 @@ void CourseList::printCourse() {
 	cout << left << setw(5) << "STT"
 		<< left << setw(10) << "Course Id"
 		<< left << setw(25) << "Falcuty"
-		<< left << setw(15) << "Subject Id"
+		<< left << setw(15) << "Sub_id"
 		<< left << setw(25) << "Subject Name"
 		<< left << setw(15) << "Student/Slot"
 		<< left << setw(6) << "Credit" << endl;
