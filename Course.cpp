@@ -194,6 +194,36 @@ CourseList* CourseList::findAllCourseByFalcuty(arrayList<string> fal_list) {
 	}
 	return cList;
 }
+
+CourseList* CourseList::findCourseByFacutyId(string fal_id) {
+	CourseList* cList = new CourseList();
+	for (size_t i = 0; i < size; i++) {
+		string s = this->list[i].fal_id;
+		toUpperCase(s);
+		toUpperCase(fal_id);
+		if (s.find(fal_id) != string::npos) {
+			cList->addToList(list[i]);
+		}
+	}
+	return cList;
+}
+CourseList* CourseList::findAllCourseByFalcutyId(arrayList<string> falid_list) {
+	CourseList* cList = new CourseList();
+	for (size_t i = 0; i < this->size; i++) {
+		string s = this->list[i].fal_id;
+		for (size_t j = 0; j < falid_list.size; j++) {
+			string s1 = falid_list.list[j];
+			toUpperCase(s);
+			toUpperCase(s1);
+			int found = s.find(s1);
+			if (found != string::npos) {
+				cList->addToList(list[i]);
+				break;
+			}
+		}
+	}
+	return cList;
+}
 bool CourseList::isCourseExist(string id, Course&out_data) {
 	Course* tmp = new Course();
 	tmp = findCourseById(id);	
