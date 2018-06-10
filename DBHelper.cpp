@@ -47,6 +47,9 @@ bool loadCourse(CourseList &courseList) {
 			data.course_id = str;
 
 			getline(ss, str, ',');
+			data.fal_id = str;
+
+			getline(ss, str, ',');
 			data.falcuty = str;
 
 			getline(ss, str, ',');
