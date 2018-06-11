@@ -386,7 +386,7 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 		}
 		float option;
 		do{
-			cout << "\nChose course to grade or press 0  to exit: ";
+			cout << "\nChose course to grade (input 0  to exit): ";
 			cin >> option;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
@@ -405,13 +405,12 @@ bool teacherProcess(Teacher& tc, UserList& user_list, StudentCourseList& db_st_c
 				if (option == i + 1){
 					data = db_st_course_list.findStudentJoinCourse(tc_open_course->list[i].course_id); //lay danh sach sinh vien + diem ma sinh vien tham gia course;
 					if (data->size == 0){
-						cout << "There are no students applied to this course, try again later!\n";
+						cout << "There are no students applied to this course\n";
 						flag = 0;
+						
 						cout << "PRESS ENTER TO GO BACK\n";
 						cin.get();
-						
 						return true;
-						
 					}
 					if (flag == 1){
 						tc.gradingCourse(*data);

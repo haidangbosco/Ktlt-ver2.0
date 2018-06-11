@@ -38,8 +38,8 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 	int flag = 0;
 	cout << endl;
 	cout << setw(40) << right << "\nStudent List:\n" << endl;
-	cout << setw(5) << left << "STT";
-	cout << setw(30) << left << "MSSV";
+	cout << setw(5) << left << "No.";
+	cout << setw(30) << left << "Student ID";
 	cout << setw(20) << right << "Point\n";
 	cout << setfill('-');
 	cout << setw(55) << "-" << endl;
@@ -57,7 +57,7 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 		do{
 			double spoint;
 
-			cout << "Input student's index  to modify grade (press 0) to exit: ";
+			cout << "Input student's index  to modify grade (input 0 to exit): ";
 			cin >> index;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
@@ -127,9 +127,9 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 		//*data = db_st_course_list.findStudentJoinCourse(tc_open_course->list[i].course_id); //lay danh sach sinh vien + diem ma sinh vien tham gia course;
 		cout << endl;
 		//cout << setw(40) << right << "__Danh Sach Sinh Vien Da Dang Ky__\n" << endl;
-		cout << setw(5) << left << "STT";
-		cout << setw(30) << left << "MSSV";
-		cout << setw(20) << right << "Grade\n";
+		cout << setw(5) << left << "No.";
+		cout << setw(30) << left << "Student ID";
+		cout << setw(20) << right << "Point\n";
 		cout << setfill('-');
 		cout << setw(55) << "-" << endl;
 		cout << setfill(' ');
@@ -164,7 +164,7 @@ void Teacher::showTeacherCouser(CourseList tc_course,StudentCourseList st_course
 	}
 }
 bool Teacher:: openNewCourse(Teacher& tc, StudentCourseList& db_st_course_list, CourseList& db_course_list){
-	cout << "\t\t______________________OPEN COURSE__________________________\n";
+	cout << "\t\t\t______________________OPEN COURSE__________________________\n";
 	CourseList* sum = new CourseList();
 	CourseList* nsum = new CourseList();
 	sum = tc.tcSumCourse(db_course_list, db_st_course_list);
