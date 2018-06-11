@@ -51,17 +51,14 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 	}
 
 	if (st_join_course.isGrade()){
-		int index;
+		double index;
 		int a = 0;
-
 		do{
 			double spoint;
-
-			cout << "Input student's index  to modify grade (input 0 to exit): ";
+			cout << "Input student's index  to modify grade (input 0 to exit): ";	
 			cin >> index;
 			cin.clear();
 			cin.ignore(INT_MAX, '\n');
-
 			if (index<0 || index>st_join_course.size || cin.bad() || index != (int)index){
 				cout << "Wrong input, try again!\n";
 				continue;
@@ -71,7 +68,8 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 				break;
 			}
 			do{
-				cout << "Input new grade for " << st_join_course.list[index - 1].st_num << " : ";
+				int i = index;
+				cout << "Input new grade for " << st_join_course.list[i - 1].st_num << " : ";
 				cin >> spoint;
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
@@ -79,7 +77,7 @@ bool Teacher::gradingCourse(StudentCourseList& st_join_course){
 					cout << "Wrong input, try again!\n";
 					continue;
 				}
-				st_join_course.list[index - 1].st_point.list[0] = spoint;
+				st_join_course.list[i - 1].st_point.list[0] = spoint;
 				flag++;
 			} while (spoint<-1 || spoint == 11 || spoint == 12 || spoint>13 || cin.bad());
 			
